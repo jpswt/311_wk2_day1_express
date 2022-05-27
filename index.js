@@ -36,7 +36,11 @@ app.get('/users', (req, res) => {
 app.get('/users/:id', (req, res) => {
 	console.log('GET /users/1');
 	// respond with a list of the first user in the users array
-	res.json(users[0]);
+	const user = users.find((user) => user._id === parseInt(req.params.id));
+	if (!user) {
+		res.status(404).send('The user with the given id is not found');
+	}
+	res.json(user);
 });
 
 /**
@@ -189,5 +193,5 @@ app.delete('/users/:userId', (req, res) => {
 });
 
 /* END - create routes here */
-
+// bind and listens for connections on the given port.
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
