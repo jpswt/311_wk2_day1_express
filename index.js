@@ -34,12 +34,14 @@ app.get('/users', (req, res) => {
  */
 
 app.get('/users/:id', (req, res) => {
-	console.log('GET /users/1');
-	// respond with a list of the first user in the users array
+	console.log('GET /users/id');
+	//create a variable that finds the user we want to update
 	const user = users.find((user) => user._id === parseInt(req.params.id));
+	//If user id does not exist, respond with a 404 status and message
 	if (!user) {
 		res.status(404).send('The user with the given id is not found');
 	}
+	// Respond with user that matches id
 	res.json(user);
 });
 
